@@ -7,18 +7,23 @@ body {
     width: 100vw;
     height: 100vh;
     margin: 0;
+    display: grid;
+    place-items: center;
 }
 /* ------------- */
 
-#gameBoard {
-    width: 500px;
-    height: 200px;
-    display: flex;
-    flex-wrap: wrap;
+header {
+    height: 10vh;
 }
+main {
+    height: 80vh;
+    display: grid;
+    place-items: center;
+}
+footer {
+    height: 10vh;
+} 
 
-.grid {
-    width: 50px;
-    height: 50px;
-    border: black solid 1px;
+#gridBoard {
+    border: 1px black solid;
 }
