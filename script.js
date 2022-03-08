@@ -20,6 +20,8 @@ class GameOfLife {
         }
       }
       this.inactive_grids = this.active_grids;
+      // console.log(inactive_grids);
+      // console.log(active_grids);
     };
 
     // function to give every grid a number of 0 or 1
@@ -29,6 +31,7 @@ class GameOfLife {
           this.active_grids[i][j] = Math.random() > 0.5 ? 1 : 0;
         }
       }
+      // console.log(this.active_grids);
     };
 
     // function to give every grid a color according to its number
@@ -65,17 +68,17 @@ class GameOfLife {
     // function that takes row and column to return 0 or 1 according to its neighbors
     this.updateGridValue = (row, col) => {
       const total = this.countNeighbours(row, col);
-      // cell with more than 4 or less then 3 neighbours dies.
+      // cell with more than 4 or less then 2 neighbours dies
       // 1 becomes 0; 0 remains 0
       if (total > 4 || total < 3) {
         return 0;
       }
-      // dead cell with 3 neighbours becomes alive.
+      // dead cell with 3 neighbours becomes alive
       // 0 becomes 1
       else if (this.active_grids[row][col] === 0 && total === 3) {
         return 1;
       }
-      // or returning its status back.
+      // or returning its status back
       //  0 remains 0; 1 remains 1
       else {
         return this.active_grids[row][col];
@@ -91,6 +94,7 @@ class GameOfLife {
         }
       }
       this.active_grids = this.inactive_grids;
+      // console.log(this.active_grids);
     };
 
     // set the game
