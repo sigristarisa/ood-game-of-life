@@ -10,9 +10,10 @@ class GameOfLife {
     this.grid_in_row = Math.floor(gridBoard.height / this.grid_size);
     this.active_grids = [];
     this.inactive_grids = [];
+  }
 
     // function to create grids
-    this.createGrids = () => {
+    createGrids = () => {
       for (let i = 0; i < this.grid_in_row; i++) {
         this.active_grids[i] = [];
         for (let j = 0; j < this.grid_in_column; j++) {
@@ -20,12 +21,12 @@ class GameOfLife {
         }
       }
       this.inactive_grids = this.active_grids;
-      // console.log(inactive_grids);
-      // console.log(active_grids);
+      // console.log(this.inactive_grids);
+      // console.log(this.active_grids);
     };
 
     // function to give every grid a number of 0 or 1
-    this.giveGridsRandomNum = () => {
+    giveGridsRandomNum = () => {
       for (let i = 0; i < this.grid_in_row; i++) {
         for (let j = 0; j < this.grid_in_column; j++) {
           this.active_grids[i][j] = Math.random() > 0.5 ? 1 : 0;
@@ -35,24 +36,24 @@ class GameOfLife {
     };
 
     // function to give every grid a color according to its number
-    this.gridColor = () => {
+    gridColor = () => {
       for (let i = 0; i < this.grid_in_row; i++) {
         for (let j = 0; j < this.grid_in_column; j++) {
           this.active_grids[i][j] === 0
-            ? (ctx.fillStyle = "green")
-            : (ctx.fillStyle = "red");
+          ? (ctx.fillStyle = "green")
+          : (ctx.fillStyle = "red");
           ctx.fillRect(
-            j * this.cell_size,
-            i * this.cell_size,
-            this.cell_size,
-            this.cell_size
+            1 * this.grid_size,
+            1 * this.grid_size,
+            this.grid_size,
+            this.grid_size
           );
         }
       }
     };
 
     // function to count neighbours
-    this.countNeighbours = (row, col) => {
+    countNeighbours = (row, col) => {
       let total_neighbours = 0;
       total_neighbours += this.active_grids[row - 1][col - 1];
       total_neighbours += this.active_grids[row - 1][col];
@@ -66,7 +67,7 @@ class GameOfLife {
     };
 
     // function that takes row and column to return 0 or 1 according to its neighbors
-    this.updateGridValue = (row, col) => {
+    updateGridValue = (row, col) => {
       const total = this.countNeighbours(row, col);
       // cell with more than 4 or less then 2 neighbours dies
       // 1 becomes 0; 0 remains 0
@@ -86,7 +87,7 @@ class GameOfLife {
     };
 
     // update the life cycle
-    this.updateLifeCycle = () => {
+    updateLifeCycle = () => {
       for (let i = 0; i < this.cells_in_rows; i++) {
         for (let j = 0; j < this.cells_in_column; j++) {
           let new_state = this.updateGridValue(i, j);
@@ -98,23 +99,24 @@ class GameOfLife {
     };
 
     // set the game
-    this.gameSetUp = () => {
+    gameSetUp = () => {
       this.createGrids();
     };
 
     // run the game
-    this.runGame = () => {
+    runGame = () => {
       this.updateLifeCycle();
       this.gridColor();
     };
   }
-}
+
 
 const game = new GameOfLife();
 game.gameSetUp();
 
 // adding event listeners to buttons to launch actions
 document.getElementById("start").addEventListener("click", () => {
+  console.log("hello from start button")
   game.giveGridsRandomNum();
   game.gridColor();
   window.setInterval(() => {
@@ -123,5 +125,6 @@ document.getElementById("start").addEventListener("click", () => {
 });
 
 document.getElementById("stop").addEventListener("click", () => {
+  console.log("hello from stop button")
   game.gameSetUp();
 });
