@@ -46,8 +46,8 @@ class GameOfLife {
     for (let i = 0; i < this.grid_in_row; i++) {
       for (let j = 0; j < this.grid_in_column; j++) {
         this.active_grids[i][j] === 0
-          ? (ctx.fillStyle = "green")
-          : (ctx.fillStyle = "red");
+          ? (ctx.fillStyle = "#641215")
+          : (ctx.fillStyle = "#e3a31f");
         ctx.fillRect(
           i * this.grid_size,
           j * this.grid_size,
